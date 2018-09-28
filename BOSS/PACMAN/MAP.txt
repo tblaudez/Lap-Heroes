@@ -1,0 +1,18 @@
+XXXXXXXXXXXXXXX13XXXXXXXXXXXXXXX
+X                 X            X
+X XXXXXX XXXXX XX XXXXX XXXXXX X
+X XXXXXX XXXXX XX XXXXX XXXXXX X
+X                              X
+X XXXXXX X XXXXXXXXXX X XXXXXX X
+X    X   X     XX     X        X
+X XX X     XX  XX XXX    XXXXXXX
+X XX X     XX   P XXX          X
+5  X   XX  XX XXX   X XXXXXXXX 6
+X    XXXX  XX XXXXX    XX      X
+X      XX  XX XXX    XXXX XXXXXX
+XXX XX     XX XXXXX            X
+X    X X   XX XX        XXX XX X
+X    X XXXXXX    XXXXXXX    XX X
+X XXXX       XXXXXXXXXXX XXXXX X
+X      XXXXX                   X
+XXXXXXXXXXXXXXX24XXXXXXXXXXXXXXX

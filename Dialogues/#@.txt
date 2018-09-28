@@ -1,0 +1,5 @@
+@C'est verrouillé. Mais vous pouvez entendre des cris étouffés à travers la porte...Rien d'important.
+@La porte est rouillée
+@La poignée est trop sale pour être touchée
+@Cette salle n'a pas encore été programmée
+@Cela mène chez les L, n'y allez surtout pas !
