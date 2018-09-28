@@ -4,7 +4,7 @@ XNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNX
 XNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNX
 XNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNX
 XNN        w                 NNX
-XNN  TMM       µ       TMM   NNX
+XNN  TMM       ;       TMM   NNX
 XNN                          NNX
 XNN                          NNX
 XNN  TMM               TMM   NNX

@@ -5,6 +5,7 @@ import os, sys
 
 #Lancement de Tkinter
 fen1 = Tk()
+custom_path = '/Users/tblaudez/Downloads/test'
 TAILLE_P = 60
 carte,cdbloc =  [], [] # commun
 snak,cdsnake,listsens = [], [], [] #spécifique au snake 1
@@ -19,7 +20,7 @@ fen1.bind("<Escape>", lambda e: fen1.destroy())
 def boot():
     global can2, can1, x1, y1, snake, largeur, scor, L
     largeur = 0
-    fichier = open('/Users/tblaudez/Downloads/LapHeroes 12 09/BOSS/SNAKE/MAP.txt', 'r')
+    fichier = open(custom_path + '/BOSS/SNAKE/MAP.txt', 'r')
     for i in fichier:
         carte.append(list(i.replace("\n","")))
         largeur += 1
@@ -190,7 +191,7 @@ def victoire():
 
 def finjeux():
     fen1.destroy()
-    sys.path.append(os.path.abspath("/Users/tblaudez/Downloads/LapHeroes 12 09"))
+    sys.path.append(os.path.abspath(custom_path))
     import lapheroes
     
     

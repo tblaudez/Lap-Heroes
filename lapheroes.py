@@ -6,6 +6,7 @@ import random, os, sys
 
 #Lancement de Tkinter
 fen1 = Tk()
+custom_path = '/Users/tblaudez/Downloads/test'
 
 
 #TAILLES
@@ -28,7 +29,7 @@ life = 20
 #PERSONNAGE
 imagelink = ['linkdroite','linkgauche','linkface','linkdos','linkdosE','linkfaceE','linkgaucheE','linkdroiteE']
 for i in imagelink:
-    image = PhotoImage(file = '/Users/tblaudez/Downloads/LapHeroes 12 09/Images/Personnages/link/%s.gif' %i) # Il s'agit d'une boucle où va chercher les images dans le dossier et on les transforme en image TK du même nom (pareil pour le decor et les PNJ)
+    image = PhotoImage(file = '%s/Images/Personnages/link/%s.gif' %(custom_path,i)) # Il s'agit d'une boucle où va chercher les images dans le dossier et on les transforme en image TK du même nom (pareil pour le decor et les PNJ)
     exec("%s = image" %i)
 
 
@@ -38,27 +39,27 @@ imagedecor = ['arbre','goudron','deck','mur','bibliotheque','ordinateurG','ordin
                'goudron','table','algeco','ordinateurG','ordinateurD','ordinateurB','ordinateurH'] #images
 
 for i in imagedecor:
-    exec("%s = PhotoImage(file = '/Users/tblaudez/Downloads/LapHeroes 12 09/Images/Decor/%s.gif')" %(i,i))
+    exec("%s = PhotoImage(file = '%s/Images/Decor/%s.gif')" %(i,custom_path,i))
 
 #PNJ
 for i in range(1,24):
-    exec("pnj%s = PhotoImage(file = '/Users/tblaudez/Downloads/LapHeroes 12 09/Images/PNJ/pnj%s.gif')" %(i,i))
+    exec("pnj%s = PhotoImage(file = '%s/Images/PNJ/pnj%s.gif')" %(i,custom_path,i))
     
     
 
-grosarbre = PhotoImage(file = '/Users/tblaudez/Downloads/LapHeroes 12 09/Images/Decor/arbre.gif').zoom(8,8)
-fare = PhotoImage(file = '/Users/tblaudez/Downloads/LapHeroes 12 09/Images/Decor/fare.gif').zoom(3,3)
+grosarbre = PhotoImage(file = custom_path + '/Images/Decor/arbre.gif').zoom(8,8)
+fare = PhotoImage(file = custom_path + '/Images/Decor/fare.gif').zoom(3,3)
 portefermee = porte
 
 ###########################################################################
 
 def start(nm): #nm : numero map
-    global carte, cdbloc, largeur, fichier, listmonstre, ennemie, sortie, listpnj, cdpnj, eleve, cdmonstre #La fonction primaire : elle crée/reinitialise les listes puis lance la création de map
+    global carte, cdbloc, largeur, fichier, listmonstre, ennemie, sortie, listpnj, cdpnj, eleve, cdmonstre, custom_path #La fonction primaire : elle crée/reinitialise les listes puis lance la création de map
     carte, cdbloc, listmonstre, cdmonstre, listpnj, cdpnj = [],[],[],[],[],[]
     sortie, eleve = {}, {}
     largeur = 0
 
-    fichier = open('/Users/tblaudez/Downloads/LapHeroes 12 09/MAPS/MAP%s.txt' %nm, 'r')
+    fichier = open('%s/MAPS/MAP%s.txt' %(custom_path,nm), 'r')
     for i in fichier:
         carte.append(list(i.replace("\n",""))) #Lecture du fichier adéquat et création de la carte sous forme de liste
         largeur += 1
@@ -95,7 +96,7 @@ def creamap():
         sprite['>'] = ordinateurD
         sprite['<'] = ordinateurG
         sprite['^'] = ordinateurH #< > ^ µ représentent le sens de certain objets, ils changent de 'skins' selon la map où l'on se trouve (ex : toilettes = robinets, CDI = bureaux avec ordi)
-        sprite['µ'] = ordinateurB
+        sprite[';'] = ordinateurB
     if mapact == '7':
         sprite['>'] = robinetsD
         sprite['<'] = robinetsG
@@ -124,7 +125,7 @@ def creamap():
                 elif carte[j][i] in ['&','-','(','_']:
                     sortie[carte[j][i]] = [i*TAILLE_P, j*TAILLE_P]
                     
-                if carte[j][i] in ['<','>','^','µ','%','@'] or carte[j][i].isalpha() == True: #Ici sont réunis tout les blocs qui engendrent des collisions
+                if carte[j][i] in ['<','>','^',';','%','@'] or carte[j][i].isalpha() == True: #Ici sont réunis tout les blocs qui engendrent des collisions
                     cdbloc.append([i*TAILLE_P, j*TAILLE_P])
                     if (carte[j][i] in ['<','>'] and mapact == '7') or (carte[j][i] == 'Z' and mapact == '1'):
                         cdbloc.remove([i*TAILLE_P, j*TAILLE_P])
@@ -213,8 +214,11 @@ def avance(gd, hb):
             start(mapact) #On lance la fonction primaire sur une nouvelle map -> on supprime tout et rebelotte, retour au début du programme
             return
     if d == 1:
-        can1.after(100, dis.destroy)
-        can1.after(100, butboss.destroy)
+        try:
+            can1.after(100, dis.destroy)
+            can1.after(100, butboss.destroy)
+        except NameError:
+            d = 0
         d = 0
     
 """Cette fonction remplace pendant quelques dizièmes de secondes le sprite du joueur afin donner
@@ -318,7 +322,7 @@ def ennemi_avance(xf,yf,i):
 
 
 def dialogue(ev=None):
-    global dis, d, butboss
+    global dis, d, butboss, custom_path
     choix = []
     if d != 1:
         if [x1, y1-TAILLE_P] in cdpnj:  #Si le joueur se trouve sous un pnj présent dans la liste, on ouvre la boite di dialogue correspondant au-dit pnj
@@ -328,7 +332,7 @@ def dialogue(ev=None):
                 pnj =  '#' + pnj
 
             d = 1
-            dialogue = open('/Users/tblaudez/Downloads/LapHeroes 12 09/Dialogues/%s.txt' %pnj, 'r')
+            dialogue = open('%s/Dialogues/%s.txt' %(custom_path,pnj), 'r')
             paroles = dialogue.read()
 
             if '@' in paroles:
@@ -343,12 +347,13 @@ def dialogue(ev=None):
             dialogue.close()
 
 def start_boss(boss):
+    global custom_path
     if boss == 'j':
-        sys.path.append(os.path.abspath("/Users/tblaudez/Downloads/LapHeroes 12 09/BOSS/SNAKE"))
+        sys.path.append(os.path.abspath("%s/BOSS/SNAKE" %custom_path))
         fen1.destroy()
         import snake
     elif boss == 'w':
-        sys.path.append(os.path.abspath("/Users/tblaudez/Downloads/LapHeroes 12 09/BOSS/PACMAN"))
+        sys.path.append(os.path.abspath("%s/BOSS/PACMAN" %custom_path))
         fen1.destroy()
         import pacman
 

@@ -6,6 +6,7 @@ import os, sys
 
 #Lancement de Tkinter
 fen1 = Tk()
+custom_path = '/Users/tblaudez/Downloads/test'
 TAILLE_P = 60
 carte,cdbloc,pacman,cdpac,listsens = [], [], [], [], []
 sortie = ['1','2','3','4','5','6' ]
@@ -21,7 +22,7 @@ fen1.bind("<Escape>", lambda e: fen1.destroy())
 
 ############CARTE#############
 largeur = 0
-fichier = open('/Users/tblaudez/Downloads/LapHeroes 12 09/BOSS/PACMAN/MAP.txt', 'r')
+fichier = open(custom_path + '/BOSS/PACMAN/MAP.txt', 'r')
 for i in fichier:
     carte.append(list(i.replace("\n","")))
     largeur += 1
@@ -218,7 +219,7 @@ def victoire(ev=None):
 
 def finjeux():
     fen1.destroy()
-    sys.path.append(os.path.abspath("/Users/tblaudez/Downloads/LapHeroes 12 09"))
+    sys.path.append(os.path.abspath(custom_path))
     import lapheroes
     
         
