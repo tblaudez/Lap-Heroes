@@ -1,4 +1,5 @@
 #!/usr/bin/python3.4
+# coding: utf-8
 
 #Importation
 from tkinter import *
@@ -6,7 +7,7 @@ import random, os, sys
 
 #Lancement de Tkinter
 fen1 = Tk()
-custom_path = '/Users/tblaudez/Downloads/test'
+custom_path = os.getcwd()
 
 
 #TAILLES

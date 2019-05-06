@@ -6,7 +6,7 @@ import os, sys
 
 #Lancement de Tkinter
 fen1 = Tk()
-custom_path = '/Users/tblaudez/Downloads/test'
+custom_path = os.getcwd()
 TAILLE_P = 60
 carte,cdbloc,pacman,cdpac,listsens = [], [], [], [], []
 sortie = ['1','2','3','4','5','6' ]
@@ -15,7 +15,7 @@ taille = TAILLE_P/3
 jeux = True
 
 #Fullscreen
-#w, h = fen1.winfo_screenwidth(), fen1.winfo_screenheight() #On prend les donnée de l'écran et on le met ne plein écran
+#w, h = fen1.winfo_screenwidth(), fen1.winfo_screenheight() #On prend les donnee de l'ecran et on le met ne plein ecran
 #fen1.overrideredirect(1)
 #fen1.geometry("%dx%d+0+0" % (w, h))
 fen1.bind("<Escape>", lambda e: fen1.destroy())
@@ -26,7 +26,7 @@ fichier = open(custom_path + '/BOSS/PACMAN/MAP.txt', 'r')
 for i in fichier:
     carte.append(list(i.replace("\n","")))
     largeur += 1
-#création map
+#creation map
 L = len(carte[1])*TAILLE_P
 l = largeur*TAILLE_P
 can1 = Canvas(fen1, bg="black", height= l, width = L)
@@ -72,8 +72,8 @@ for i in cdsortie:
     
 can1.pack(side=LEFT)
 #DEPLACEMENTs
-sens = 'début'
-dx = 0#déplacements au début de la partie
+sens = 'debut'
+dx = 0#deplacements au debut de la partie
 dy = 0
 
 def depl_gauche(ev=None):

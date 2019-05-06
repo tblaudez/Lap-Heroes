@@ -5,13 +5,13 @@ import os, sys
 
 #Lancement de Tkinter
 fen1 = Tk()
-custom_path = '/Users/tblaudez/Downloads/test'
+custom_path = os.getcwd()
 TAILLE_P = 60
 carte,cdbloc =  [], [] # commun
-snak,cdsnake,listsens = [], [], [] #spécifique au snake 1
+snak,cdsnake,listsens = [], [], [] #specifique au snake 1
 
 #Fullscreen
-#w, h = fen1.winfo_screenwidth(), fen1.winfo_screenheight() #On prend les donnée de l'écran et on le met ne plein écran
+#w, h = fen1.winfo_screenwidth(), fen1.winfo_screenheight() #On prend les donnee de l'ecran et on le met ne plein ecran
 #fen1.overrideredirect(1)
 #fen1.geometry("%dx%d+0+0" % (w, h))
 fen1.bind("<Escape>", lambda e: fen1.destroy())
@@ -24,7 +24,7 @@ def boot():
     for i in fichier:
         carte.append(list(i.replace("\n","")))
         largeur += 1
-    #création map
+    #creation map
     L = len(carte[1])*TAILLE_P
     l = largeur*TAILLE_P
     can2 = Canvas(fen1, bg="black", height= TAILLE_P, width = L)
@@ -49,17 +49,17 @@ def boot():
     start()
 ########################################################################################################################################
 #DEPLACEMENTs snake 1
-sens = 'début'
-dx = 0#déplacements au début de la partie
+sens = 'debut'
+dx = 0#deplacements au debut de la partie
 dy = 0
-depl = 0#deplacemetn libre(variable pour régler bug des sens qui peuvent s'inverser)
+depl = 0#deplacemetn libre(variable pour regler bug des sens qui peuvent s'inverser)
 def depl_gauche(ev=None):
     global sens, dx, dy, depl
     if sens != 'droite' and depl == 0:#si deplacement n'est pas pris
         sens = 'gauche'
         dx = -TAILLE_P
         dy = 0
-        depl = 1 #déplacement choisit donc on "lock" le deplacemnt
+        depl = 1 #deplacement choisit donc on "lock" le deplacemnt
 def depl_droite(ev=None):
     global sens, dx, dy, depl
     if sens != 'gauche' and depl == 0:
@@ -87,18 +87,18 @@ def depl_bas(ev=None):
 
 n = 150 #vitesse du fen1.after
 q = 0 #compte le nombre de queue(pour augmenter la vitesse)
-h = 0 #variable pour débuter l'enregistrement des sens
+h = 0 #variable pour debuter l'enregistrement des sens
 s = 0 #score
 jeux = True
 
         
 def start():
     global x1, y1, sauvsens, n, cdsnake, listsens, h, q, depl, s
-    if h == 0: #pour le sens du début
+    if h == 0: #pour le sens du debut
         listsens.append(sens)
         h = 1
-    listsens[0] = sens #le sens en tête de liste sera toujours celui de la tête
-    x1 = x1+dx #on définit les nouvelles coords de la tête
+    listsens[0] = sens #le sens en tete de liste sera toujours celui de la tete
+    x1 = x1+dx #on definit les nouvelles coords de la tete
     y1 = y1+dy
     if [x1,y1] in cdbloc or [x1,y1] in cdsnake and [x1,y1] != cdsnake[0] :#collisions avec les bords ou avec sa queue
         can1.delete(snake)#mort
@@ -106,16 +106,16 @@ def start():
         print(s)
         dead()
         return
-    if [x1,y1] == [xb,yb] : #si la tête bouffe 
+    if [x1,y1] == [xb,yb] : #si la tete bouffe 
         can1.delete(bouf)#on efface la bouffe actuelle
-        queue()#on crée un bout de queue
-        bouffe()#on recrée de la bouffe  
+        queue()#on cree un bout de queue
+        bouffe()#on recree de la bouffe  
     if q == 5:#augmentation de la vitesse tout les 5 points
         n -= 10
         q = 0
-    avance()#on avance tout le reste en fonction de la tête
-    cdsnake[0] = [x1,y1]#les coord en tête doivent etre ceux de la tête
-    can1.coords(snake,x1,y1,x1+TAILLE_P,y1+TAILLE_P)#on crée la tête
+    avance()#on avance tout le reste en fonction de la tete
+    cdsnake[0] = [x1,y1]#les coord en tete doivent etre ceux de la tete
+    can1.coords(snake,x1,y1,x1+TAILLE_P,y1+TAILLE_P)#on cree la tete
     depl = 0
     score()
     if jeux:
